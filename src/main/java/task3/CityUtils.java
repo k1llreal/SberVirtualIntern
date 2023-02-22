@@ -2,6 +2,7 @@ package task3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -88,17 +89,24 @@ public class CityUtils {
         cities.forEach(System.out::println);
     }
 
+    /**
+     * Поиск города с наибольшим кол-вом жителей путем простого перебора
+     *
+     * @param cities массив городов
+     */
     public static void searchCityMaxPopulation(List<City> cities) {
-        City[] array = cities.toArray(new City[0]);
-        int max = 0;
+        City[] array = new City[cities.size()];
+        cities.toArray(array);
+        City current = array[0];
         int index = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].getPopulation() > max) {
-                max = array[i].getPopulation();
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i].getPopulation() > current.getPopulation()) {
+                current = array[i];
                 index = i;
             }
         }
-        System.out.println("[" + index + "] = " + max);
+        System.out.println(MessageFormat.format("[{0}] = {1}", index, array[index].getPopulation()));
     }
 
 
